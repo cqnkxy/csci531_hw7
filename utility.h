@@ -17,5 +17,11 @@ void Fatal(const char *fmt, ...);
 void Fprint(const char *fmt, ...);
 bool AllHex(const std::string &);
 bool AllDec(const std::string &);
-
+// Return the ith bit of the bytes. Doesn't check for index out of range.
+bool IthBit(const std::string &bytes, size_t i);
+// Start at the ith bit and take len bits
+size_t RangeBits(const std::string &bytes, size_t i, size_t len);
+size_t SquareSumVec(const std::vector<size_t> &vec);
+// Padding 0 in front to meet length of len if necessary
+std::string DecToBinary(unsigned num, size_t len);
 #endif

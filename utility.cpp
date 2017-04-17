@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <cassert>
+#include <algorithm>
 #include <vector>
 #include "utility.h"
 
@@ -78,4 +79,36 @@ bool AllDec(const string &str) {
 		}
 	}
 	return true;
+}
+
+bool IthBit(const string &bytes, size_t i) {
+	return bytes[i/8] & (1 << (7-i%8));
+}
+
+size_t RangeBits(const string &bytes, size_t i, size_t len) {
+	size_t ans = 0;
+	for (int c = i; c < i+len; c++) {
+		ans = (ans << 1) | IthBit(bytes, c);
+	}
+	return ans;
+}
+
+size_t SquareSumVec(const vector<size_t> &vec) {
+	unsigned sum = 0;
+	for (size_t i = 0; i < vec.size(); i++){
+		sum += vec[i]*vec[i];
+	}
+	return sum;
+}
+
+string DecToBinary(unsigned num, size_t len) {
+	string ans;
+	while (num) {
+		ans += '0' + (num & 0x1);
+		num >>= 1;
+	}
+	while (ans.size() < len) {
+		ans += '0';
+	}
+	return string(ans.begin(), ans.end());
 }

@@ -6,6 +6,7 @@
 #include "rc4.h"
 #include "x1.h"
 #include "x2.h"
+#include "x3.h"
 
 using namespace std;
 
@@ -69,6 +70,19 @@ void parse_x2(int argc, char *argv[]) {
 	}
 }
 
+void parse_x3(int argc, char *argv[]) {
+	if (argc != 2 && argc != 3) {
+		malformed_command();
+	}
+	if (argc == 2) {
+		X3(cin);
+	} else {
+		ifstream in(argv[2]);
+		X3(in);
+		in.close();
+	}
+}
+
 void parse_cmd_run(int argc, char *argv[]) {
 	if (argc < 2) {
 		malformed_command();
@@ -78,6 +92,8 @@ void parse_cmd_run(int argc, char *argv[]) {
 		parse_x1(argc, argv);
 	} else if (strcmp(argv[1], "x2") == 0) {
 		parse_x2(argc, argv);
+	} else if (strcmp(argv[1], "x3") == 0) {
+		parse_x3(argc, argv);
 	} else {
 		malformed_command();
 	}
