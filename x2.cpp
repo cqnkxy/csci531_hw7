@@ -34,7 +34,7 @@ void X2(std::istream &in) {
 		cout << endl;
 	}
 	if (n < 21) {
-		Fatal("n = %lu\nx1: insufficient data\n", n);
+		Fatal("n = %lu\nx2: insufficient data\n", n);
 	}
 	double x2 = 4.0/(n-1)*SquareSumVec(twoBits)-2.0/n*(n0*n0+n1*n1)+1;
 	printf("n = %lu\n", n);

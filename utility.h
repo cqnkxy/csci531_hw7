@@ -24,4 +24,5 @@ size_t RangeBits(const std::string &bytes, size_t i, size_t len);
 size_t SquareSumVec(const std::vector<size_t> &vec);
 // Padding 0 in front to meet length of len if necessary
 std::string DecToBinary(unsigned num, size_t len);
+
 #endif

@@ -6,6 +6,7 @@
 
 using namespace std;
 
+static const int THRESHOLD_START = 1;
 static const double THRESHOLDS[] = {
 	3.8415,
 	7.8147,
@@ -38,7 +39,7 @@ void X3(istream &in) {
 		cout << endl;
 	}
 	if (n < 10) {
-		Fatal("n = %lu\nx1: insufficient data\n", n);
+		Fatal("n = %lu\nx3: insufficient data\n", n);
 	}
 	int m = 0;
 	for (int i = 1; i <= 11; i++) {
@@ -48,7 +49,7 @@ void X3(istream &in) {
 	}
 	if (m > 10) {
 		// Should never happen
-		Fatal("n = %lu\nm =%d\nx3: m is too large", n, m);
+		Fatal("n = %lu\nm =%d\nx3: m is too large\n", n, m);
 	}
 	int k = n/m;
 	vector<size_t> mbits(1<<m, 0);
@@ -63,5 +64,6 @@ void X3(istream &in) {
 		printf("n%s = %lu\n", DecToBinary((unsigned)i, m).c_str(), mbits[i]);
 	}
 	printf("x3 = %.06f\n", x3);
-	printf("pass/fail = %s\n", (x3 <= THRESHOLDS[m-1] ? "pass" : "fail"));
+	printf("pass/fail = %s\n", (x3 <= THRESHOLDS[m-THRESHOLD_START] ? "pass" : "fail"));
+
 }

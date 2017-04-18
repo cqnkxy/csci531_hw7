@@ -7,6 +7,8 @@
 #include "x1.h"
 #include "x2.h"
 #include "x3.h"
+#include "x4.h"
+#include "x5.h"
 
 using namespace std;
 
@@ -23,7 +25,7 @@ void malformed_command() {
 }
 
 void parse_rc4(int argc, char *argv[]) {
-	if (argc != 4 && argc != 5) {
+	if (argc != 3 && argc != 4) {
 		malformed_command();
 	}
 	string pphrase;
@@ -83,6 +85,36 @@ void parse_x3(int argc, char *argv[]) {
 	}
 }
 
+void parse_x4(int argc, char *argv[]) {
+	if (argc != 2 && argc != 3) {
+		malformed_command();
+	}
+	if (argc == 2) {
+		X4(cin);
+	} else {
+		ifstream in(argv[2]);
+		X4(in);
+		in.close();
+	}	
+}
+
+void parse_x5(int argc, char *argv[]) {
+	if (argc != 4 && argc != 3) {
+		malformed_command();
+	}
+	string opt(argv[2]);
+	if (opt.substr(0, 3) != "-d=" || !AllDec(opt.substr(3, -1))) {
+		malformed_command();
+	}
+	if (argc == 3) {
+		X5(cin, atoi(opt.substr(3, -1).c_str()));
+	} else {
+		ifstream in(argv[3]);
+		X5(in, atoi(opt.substr(3, -1).c_str()));
+		in.close();
+	}	
+}
+
 void parse_cmd_run(int argc, char *argv[]) {
 	if (argc < 2) {
 		malformed_command();
@@ -94,6 +126,10 @@ void parse_cmd_run(int argc, char *argv[]) {
 		parse_x2(argc, argv);
 	} else if (strcmp(argv[1], "x3") == 0) {
 		parse_x3(argc, argv);
+	} else if (strcmp(argv[1], "x4") == 0) {
+		parse_x4(argc, argv);
+	} else if (strcmp(argv[1], "x5") == 0) {
+		parse_x5(argc, argv);
 	} else {
 		malformed_command();
 	}
