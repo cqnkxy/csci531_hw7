@@ -22,25 +22,27 @@ static const double THRESHOLDS[] = {
 };
 
 void X4(istream &in) {
-	size_t n = 0, total = 0, cnt = 0;
+	int n = 0, total = 0, cnt = 0;
 	unsigned char byte;
 	string bytes;
-	while (in >> noskipws >> byte && total < 256) {
-		printf("%02x", byte);
-		cnt += 2;
+	while (in >> noskipws >> byte) {
 		n += 8;
-		total++;
-		bytes += byte;
-		if (cnt == 32) {
-			cnt = 0;
-			cout << endl;
+		if (total < 256) {
+			printf("%02x", byte);
+			cnt += 2;
+			total++;
+			if (cnt == 32) {
+				cnt = 0;
+				cout << endl;
+			}
 		}
+		bytes += byte;
 	}
 	if (cnt != 0) {
 		cout << endl;
 	}
 	if (n < 79) {
-		Fatal("n = %zu\nx4: insufficient data\n", n);
+		Fatal("n = %d\nx4: insufficient data\n", n);
 	}
 	int k = 0;
 	for (int i = 2; i <= 12; i++) {
@@ -50,9 +52,9 @@ void X4(istream &in) {
 	}
 	assert(k >= 2);
 	if (k >= 12) {
-		Fatal("n = %zu\nk = %d\nx4: k is too large\n", n, k);
+		Fatal("n = %d\nk = %d\nx4: k is too large\n", n, k);
 	}
-	printf("n = %zu\n", n);
+	printf("n = %d\n", n);
 	printf("k = %d\n", k);
 	double x4 = 0;
 	size_t total_bits = bytes.size() << 3;

@@ -10,32 +10,12 @@ using namespace std;
 
 const bool DEBUG = true;
 
-void CountZeroOneBits(unsigned char byte, size_t &n0, size_t &n1) {
+void CountZeroOneBits(unsigned char byte, int &n0, int &n1) {
 	for (int i = 0; i < 8; ++i) {
 		unsigned char bit = (byte >> i) & 0x1;
 		n0 += bit == 0;
 		n1 += bit == 1;
 	}
-}
-
-size_t HexDumpInput(istream &in) {
-	unsigned char byte;
-	int cnt = 0, total = 0;
-	size_t bits = 0;
-	while (in >> byte && total < 256) {
-		printf("%02x", byte);
-		cnt += 2;
-		total++;
-		bits += 8;
-		if (cnt == 32) {
-			cnt = 0;
-			cout << endl;
-		}
-	}
-	if (cnt != 0) {
-		cout << endl;
-	}
-	return bits;
 }
 
 void HexDumpVec(const vector<unsigned char> &vec){
@@ -81,33 +61,33 @@ bool AllDec(const string &str) {
 	return true;
 }
 
-bool IthBit(const string &bytes, size_t i) {
+bool IthBit(const string &bytes, int i) {
 	return bytes[i/8] & (1 << (7-i%8));
 }
 
-size_t RangeBits(const string &bytes, size_t i, size_t len) {
-	size_t ans = 0;
-	for (size_t c = i; c < i+len; c++) {
+unsigned RangeBits(const string &bytes, int i, int len) {
+	unsigned ans = 0;
+	for (int c = i; c < i+len; c++) {
 		ans = (ans << 1) | IthBit(bytes, c);
 	}
 	return ans;
 }
 
-size_t SquareSumVec(const vector<size_t> &vec) {
-	unsigned sum = 0;
+double SquareSumVec(const vector<int> &vec) {
+	double sum = 0;
 	for (size_t i = 0; i < vec.size(); i++){
-		sum += vec[i]*vec[i];
+		sum += 1.0*vec[i]*vec[i];
 	}
 	return sum;
 }
 
-string DecToBinary(unsigned num, size_t len) {
+string DecToBinary(unsigned num, int len) {
 	string ans;
 	while (num) {
 		ans += '0' + (num & 0x1);
 		num >>= 1;
 	}
-	while (ans.size() < len) {
+	while ((int)ans.size() < len) {
 		ans += '0';
 	}
 	return string(ans.begin(), ans.end());
