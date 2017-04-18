@@ -11,21 +11,22 @@ using namespace std;
 void generateKey(const string &pphrase, vector<unsigned char> &res){
 	const char *p = pphrase.c_str();
 	unsigned char md5_buf[MD5_DIGEST_LENGTH];
-    char *s = new char[strlen(p)+3];
+	char *s = (char*)malloc(strlen(p)+3);
+	cout << "Key= " << p << endl;
     for (int i = 0; i < 16; i++) {
-        sprintf(s, "%02d%s", i, pphrase.c_str());
+        sprintf(s, "%02d%s", i, p);
         MD5((const unsigned char*)s, strlen(s), md5_buf);
-        for (int j = 0; j < MD5_DIGEST_LENGTH; ++j) {
+        for (int j = 0; j < (int)sizeof(md5_buf); ++j) {
         	res.push_back(md5_buf[j]);
         }
     }
-    delete []s;
+    free(s);
 }
 
 // for i from 0 to 255
-//         S[i] := i
-//     j := 0
-//	for i from 0 to 255
+//      S[i] := i
+// j := 0
+// for i from 0 to 255
 //		j := (j + S[i] + key[i mod keylength]) mod 256
 //		swap(S[i],S[j])
 void keyScheduling(
@@ -56,7 +57,7 @@ void output(vector<unsigned char> &S, int len){
         i = (i + 1) % 256;
         j = (j + S[i]) % 256;
         swap(S[i],S[j]);
-        fwrite(&S[(S[i] + S[j]) % 256], 1, 1, stdout);
+        cout << S[(S[i] + S[j]) % 256];
     }
 }
 

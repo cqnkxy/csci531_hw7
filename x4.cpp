@@ -40,7 +40,7 @@ void X4(istream &in) {
 		cout << endl;
 	}
 	if (n < 79) {
-		Fatal("n = %lu\nx4: insufficient data\n", n);
+		Fatal("n = %zu\nx4: insufficient data\n", n);
 	}
 	int k = 0;
 	for (int i = 2; i <= 12; i++) {
@@ -50,13 +50,13 @@ void X4(istream &in) {
 	}
 	assert(k >= 2);
 	if (k >= 12) {
-		Fatal("n = %lu\nk = %d\nx4: k is too large\n", n, k);
+		Fatal("n = %zu\nk = %d\nx4: k is too large\n", n, k);
 	}
-	printf("n = %lu\n", n);
+	printf("n = %zu\n", n);
 	printf("k = %d\n", k);
 	double x4 = 0;
 	size_t total_bits = bytes.size() << 3;
-	for (size_t i = 1; i <= k; i++) {
+	for (size_t i = 1; i <= (size_t)k; i++) {
 		unsigned Bi = 0, Gi = 0;
 		for (size_t idx = 0; idx + i <= total_bits; idx++) {
 			size_t start = idx, end = start+i;
@@ -66,16 +66,16 @@ void X4(istream &in) {
 					(end == total_bits || IthBit(bytes, end) == 1)) {
 				Gi++;
 			}
-			if (bits == (1<<i)-1 &&
+			if (bits == size_t((1<<i)-1) &&
 					(start == 0 || IthBit(bytes, start-1) == 0) &&
 					(end == total_bits || IthBit(bytes, end) == 0)) {
 				Bi++;
 			}
 		}
 		double ei = (n-i+3)*1.0/(1<<(i+2));
-		printf("e%lu = %.06f\n", i, ei);
-		printf("B%lu = %d\n", i, Bi);
-		printf("G%lu = %d\n", i, Gi);
+		printf("e%zu = %.06f\n", i, ei);
+		printf("B%zu = %d\n", i, Bi);
+		printf("G%zu = %d\n", i, Gi);
 		x4 += (Bi-ei)*(Bi-ei)/ei + (Gi-ei)*(Gi-ei)/ei;
 	}
 	printf("x4 = %.06f\n", x4);

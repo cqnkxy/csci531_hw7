@@ -39,25 +39,25 @@ void X3(istream &in) {
 		cout << endl;
 	}
 	if (n < 10) {
-		Fatal("n = %lu\nx3: insufficient data\n", n);
+		Fatal("n = %zu\nx3: insufficient data\n", n);
 	}
 	int m = 0;
-	for (int i = 1; i <= 11; i++) {
-		if (n/i >= 5*(1<<i)) {
-			m = i;
+	for (size_t i = 1; i <= 11; i++) {
+		if (n/i >= size_t(5*(1<<i))) {
+			m = (int)i;
 		}
 	}
 	if (m > 10) {
 		// Should never happen
-		Fatal("n = %lu\nm =%d\nx3: m is too large\n", n, m);
+		Fatal("n = %zu\nm =%d\nx3: m is too large\n", n, m);
 	}
 	int k = n/m;
 	vector<size_t> mbits(1<<m, 0);
-	for (size_t i = 0; i < k; i++){
+	for (size_t i = 0; i < (size_t)k; i++){
 		mbits[RangeBits(bytes, i*m, m)]++;
 	}
 	double x3 = 1.0*(1<<m)/k*SquareSumVec(mbits)-k;
-	printf("n = %lu\n", n);
+	printf("n = %zu\n", n);
 	printf("m = %d\n", m);
 	printf("k = %d\n", k);
 	for (size_t i = 0; i < mbits.size(); i++) {

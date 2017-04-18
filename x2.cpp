@@ -34,16 +34,16 @@ void X2(std::istream &in) {
 		cout << endl;
 	}
 	if (n < 21) {
-		Fatal("n = %lu\nx2: insufficient data\n", n);
+		Fatal("n = %zu\nx2: insufficient data\n", n);
 	}
 	double x2 = 4.0/(n-1)*SquareSumVec(twoBits)-2.0/n*(n0*n0+n1*n1)+1;
-	printf("n = %lu\n", n);
-	printf("n0 = %lu\n", n0);
-	printf("n1 = %lu\n", n1);
-	printf("n00 = %lu\n", twoBits[0]);
-	printf("n01 = %lu\n", twoBits[1]);
-	printf("n10 = %lu\n", twoBits[2]);
-	printf("n11 = %lu\n", twoBits[3]);
+	printf("n = %zu\n", n);
+	printf("n0 = %zu\n", n0);
+	printf("n1 = %zu\n", n1);
+	printf("n00 = %zu\n", twoBits[0]);
+	printf("n01 = %zu\n", twoBits[1]);
+	printf("n10 = %zu\n", twoBits[2]);
+	printf("n11 = %zu\n", twoBits[3]);
 	printf("x2 = %.06f\n", x2);
 	printf("pass/fail = %s\n", (x2 <= THRESHOLD ? "pass" : "fail"));
 }

@@ -28,20 +28,20 @@ void X5(istream &in, int dval) {
 	if (cnt != 0) {
 		cout << endl;
 	}
-	if (n < dval + 10) {
-		Fatal("n = %lu\nx5: insufficient data\n", n);
+	if (n < (size_t)dval + 10) {
+		Fatal("n = %zu\nx5: insufficient data\n", n);
 	}
-	if (dval < 1 || dval > (n>>1)) {
-		Fatal("n = %lu\nx5: d should be in the range [1,%lu]\n", n, n>>1);
+	if (dval < 1 || (size_t)dval > (n>>1)) {
+		Fatal("n = %zu\nx5: d should be in the range [1,%zu]\n", n, n>>1);
 	}
 	size_t Ad = 0;
 	for (size_t i = 0; i < n-dval; i++) {
 		Ad += IthBit(bytes, i) != IthBit(bytes, i+dval);
 	}
 	double x5 = 2*(Ad - (n-dval)/2.0) / sqrt(n-dval);
-	printf("n = %lu\n", n);
+	printf("n = %zu\n", n);
 	printf("d = %d\n", dval);
-	printf("A(d) = %lu\n", Ad);
+	printf("A(d) = %zu\n", Ad);
 	printf("x5 = %.06f\n", x5);
 	printf("pass/fail = %s\n", x5 < THRESHOLD ? "pass" : "fail");
 }

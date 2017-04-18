@@ -87,7 +87,7 @@ bool IthBit(const string &bytes, size_t i) {
 
 size_t RangeBits(const string &bytes, size_t i, size_t len) {
 	size_t ans = 0;
-	for (int c = i; c < i+len; c++) {
+	for (size_t c = i; c < i+len; c++) {
 		ans = (ans << 1) | IthBit(bytes, c);
 	}
 	return ans;
