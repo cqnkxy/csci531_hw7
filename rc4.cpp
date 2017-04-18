@@ -12,7 +12,6 @@ void generateKey(const string &pphrase, vector<unsigned char> &res){
 	const char *p = pphrase.c_str();
 	unsigned char md5_buf[MD5_DIGEST_LENGTH];
 	char *s = (char*)malloc(strlen(p)+3);
-	cout << "Key= " << p << endl;
     for (int i = 0; i < 16; i++) {
         sprintf(s, "%02d%s", i, p);
         MD5((const unsigned char*)s, strlen(s), md5_buf);
@@ -65,5 +64,11 @@ void RC4(const string &pphrase, int len) {
 	vector<unsigned char> key, S;
 	generateKey(pphrase, key);
 	keyScheduling(key, S);
-	output(S, len);
+	if (len < 0) {
+		for (int c = 0; c < 256; ++c) {
+			cout << S[c];
+		}
+	} else {
+		output(S, len);
+	}
 }

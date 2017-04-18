@@ -24,7 +24,7 @@ void X3(istream &in) {
 	int n = 0, cnt = 0, total = 0;
 	unsigned char byte;
 	string bytes;
-	while (in >> noskipws >> byte && total < 256) {
+	while (in >> noskipws >> byte) {
 		n += 8;
 		if (total < 256) {
 			printf("%02x", byte);

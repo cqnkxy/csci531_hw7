@@ -19,8 +19,13 @@ void CountZeroOneBits(unsigned char byte, int &n0, int &n1) {
 }
 
 void HexDumpVec(const vector<unsigned char> &vec){
+	int cnt = 0;
 	for (size_t i=0; i < vec.size(); ++i) {
 		printf("%02x", vec[i]);
+		cnt = (cnt+2)%32;
+		if (cnt == 0) {
+			cout << endl;
+		}
 	}
 	cout << endl;
 }
@@ -90,5 +95,6 @@ string DecToBinary(unsigned num, int len) {
 	while ((int)ans.size() < len) {
 		ans += '0';
 	}
-	return string(ans.begin(), ans.end());
+	reverse(ans.begin(), ans.end());
+	return ans;
 }
